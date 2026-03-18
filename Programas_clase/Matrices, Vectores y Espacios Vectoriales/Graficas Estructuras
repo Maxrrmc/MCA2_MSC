@@ -2,24 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# Configuración de la malla
 x = np.linspace(-2, 2, 100)
 y = np.linspace(-2, 2, 100)
 X, Y = np.meshgrid(x, y)
 
-# Definición de los polinomios extraídos de la base de P_H4
 P1 = X**4 + 2*X**2*Y**2 + Y**4
 P2 = X**4 - Y**4
 
-# Graficación
 fig = plt.figure(figsize=(12, 5))
 
-# Subplot para P1: Simetría radial (siempre positivo)
 ax1 = fig.add_subplot(121, projection='3d')
 ax1.plot_surface(X, Y, P1, cmap='viridis')
 ax1.set_title('$P_1(x, y) = (x^2 + y^2)^2$')
 
-# Subplot para P2: Diferencia de potencias (cambia de signo)
 ax2 = fig.add_subplot(122, projection='3d')
 ax2.plot_surface(X, Y, P2, cmap='magma')
 ax2.set_title('$P_2(x, y) = x^4 - y^4$')
