@@ -1,0 +1,25 @@
+from sympy import symbols, cos, sin, plot_parametric, pi
+
+# 1. Definimos la variable angular
+theta = symbols('theta')
+
+# 2. Definimos la función r(theta) con a = 2
+a = 2
+r = a * (1 + cos(theta))
+
+# 3. Convertimos a coordenadas x, y parametrizadas
+x = r * cos(theta)
+y = r * sin(theta)
+
+# 4. Graficamos con a = 2
+# Nota: Como el radio máximo es 2*a = 4, ajustamos los límites de los ejes
+plot_parametric(x, y, (theta, 0, 2*pi), title=r"Gráfica del Cardioide: $r(\theta) = a(1 + \cos(\theta))$",
+                xlim=(-2, 5), ylim=(-3, 3), line_color='red');
+
+# JUSTIFICACIÓN
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. Se transformaron las coordenadas polares a cartesianas mediante x = r*cos(θ) y y = r*sin(θ) para su representación en el plano xy.")
+print("2. El parámetro 'axis(equal)' es indispensable para evitar distorsiones en la geometría circular de la curva y preservar su simetría respecto al eje x.")
+print("3. Cuando θ = π, cos(θ) = -1, lo que hace que r = 0. Esto genera el 'pico' o cúspide que se observa en el origen (0,0).")
+print("4. El valor de r oscila entre 0 (en θ = π) y 2a (en θ = 0). Esto significa que la figura se extiende mayormente hacia el lado positivo del eje x")
+print("5. Se obtuvieron las coordenadas x,y mediante las relaciones: x = a(1 + cosθ)cosθ  |  y = a(1 + cosθ)sinθ")
