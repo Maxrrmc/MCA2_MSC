@@ -1,0 +1,34 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+h = 6
+
+theta = np.linspace(0, 2 * np.pi, 4000)
+r = 3 * np.cos(2 * theta)
+x = r * np.sin(theta)
+y = r * np.cos(theta)
+
+plt.title('Gráfica Flor; parámetro h = 6') 
+plt.axis('off');
+plt.axis('equal');
+plt.plot(x, y, color='red'); 
+
+plt.show()
+
+# Justificación
+print("¿Qué notas en las gráficas? Justifica la conducta observada")
+print("-------------------------------------------------------------------------")
+print("""Se nota que la gráfica no cambia absolutamente nada. Al cambiar el valor 
+de h a 1, 2, 3, 5 o 6, la rosa de 4 pétalos mantiene exactamente el mismo 
+tamaño, la misma forma y la misma posición en la pantalla. Es una imagen 
+idéntica en cada ejecución.\n""")
+
+print("Justificación de la conducta:")
+print("""La conducta se debe a un detalle en la lógica del código: la variable h 
+está declarada al inicio, pero no está vinculada a ninguna operación matemática 
+posterior. La ecuación del radio utiliza un valor constante (r = 3 * cos(2 * theta)). 
+
+Al no usarse la variable h para calcular r, x o y, cualquier cambio en su valor 
+es completamente ignorado por Matplotlib, manteniendo la rosa con un radio 
+fijo de 3 de manera permanente.""")
+print("-------------------------------------------------------------------------")
