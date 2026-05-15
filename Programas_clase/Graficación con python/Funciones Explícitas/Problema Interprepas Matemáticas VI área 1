@@ -1,0 +1,31 @@
+from sympy import symbols, sqrt, ln
+from sympy.plotting import plot
+
+# 1. Definimos la variable y las funciones base
+x = symbols('x')
+
+def f(x):
+    return sqrt(-x)
+
+def g(x):
+    return ln(x)
+
+# 2. Graficamos f ∘ g (f compuesta con g)
+# Nota: f(g(x)) = sqrt(-ln(x))
+plot(f(g(x)), (x, 0.02, 1), title="Gráfica de f ∘ g", line_color='blue')
+
+# 3. Graficamos g ∘ f (g compuesta con f)
+# Nota: g(f(x)) = ln(sqrt(-x))
+plot(g(f(x)), (x, -10, -0.02), title="Gráfica de g ∘ f", line_color='green')
+
+# 4. Graficamos fg (f multiplicada por g)
+# Nota: f(x) * g(x) = sqrt(-x) * ln(x)
+# Esta función no tiene dominio real (sqrt pide x <= 0 y ln pide x > 0)
+# Pero podemos graficarla así:
+plot(f(x) * g(x), title="Gráfica de f * g", line_color='red')
+
+# Justificación
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. f ∘ g: Existe solo en (0, 1] porque ln(x) debe ser <= 0.")
+print("2. g ∘ f: Existe solo en (-inf, 0) porque √(-x) debe ser > 0.")
+print("3. fg: No tiene dominio real. La intersección de x <= 0 y x > 0 es vacía.")
