@@ -1,0 +1,27 @@
+from sympy import symbols, sin, pi, Sum, diff
+from sympy.plotting import plot
+
+# 1. Definimos las variables
+x, k = symbols('x k')
+
+# 2. Definimos la función f(x) usando Sum (de k=1 a 100)
+# f(x) = sum_{k=1}^{100} [ sin(2*pi*k^2*x)/(4*pi^2*k^5) + x^2/(2k) ]
+termino = (sin(2 * pi * k**2 * x) / (4 * pi**2 * k**5)) + (x**2 / (2 * k))
+f_expr = Sum(termino, (k, 1, 100)).doit()
+
+# 3. Calculamos las derivadas automáticamente
+f_primera = diff(f_expr, x)
+f_segunda = diff(f_primera, x)
+
+# 4. Graficamos los resultados
+# Usamos un rango pequeño (ej. -2.0 a 2.0) para notar el comportamiento "salvaje"
+plot(f_expr, (x, -2.0, 2.0), line_color='green', title='f(x) (Se ve "inocente")')
+
+plot(f_primera, (x, -2.0, 2.0), line_color='orange', title="f '(x) (Empieza el comportamiento salvaje)")
+
+plot(f_segunda, (x, -2.00, 2.00), line_color='red', title="f ''(x) (Comportamiento caótico)")
+
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. f(x): Los denominadores k^5 dominan, haciendo que la función sea suave.")
+print("2. f'(x): La regla de la cadena extrae k^2, reduciendo el denominador efectivo a k^3.")
+print("3. f''(x): Se extrae otro k^2, dejando un denominador de k^1 (k), lo que genera oscilaciones violentas.")
