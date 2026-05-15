@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parámetros
+c = 2
+theta = np.linspace(0.1, 8 * np.pi, 5000)
+r = c / theta
+
+# Graficar
+plt.polar(theta, r, color='purple', linewidth=2)
+
+# Ajustamos el título con 'pad' para que no choque con el 90°
+plt.title("Espiral Hiperbólica ($r = c/\\theta$)", pad=30)
+
+# Limitamos el radio para mejor visualización
+plt.ylim(0, 5)
+
+plt.show()
+
+# Justificación
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. Se define theta desde 0.1 para evitar la singularidad en el origen (división por cero) y permitir el cálculo numérico del radio.")
+print("2. La ecuación r = c/θ establece una proporcionalidad inversa donde el radio decrece conforme el ángulo aumenta, tendiendo al polo asintóticamente.")
+print("3. El uso de plt.polar() permite trazar la curva en su sistema de coordenadas nativo sin necesidad de transformaciones manuales a cartesianas.")
+print("4. Matemáticamente, cuando θ → ∞ el radio r → 0, lo que explica por qué la curva se enrolla infinitamente hacia el origen.")
