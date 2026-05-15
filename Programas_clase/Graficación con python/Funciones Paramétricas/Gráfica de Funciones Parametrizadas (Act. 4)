@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definición del parámetro t de 0 a 14π
+# Usamos muchos puntos para que la curva se vea suave
+t = np.linspace(0, 14 * np.pi, 2000)
+
+# Definición de las ecuaciones paramétricas
+x_t = np.cos(t) + (1/2)*np.cos(7*t) + (1/3)*np.sin(17*t)
+y_t = np.sin(t) + (1/2)*np.sin(7*t) + (1/3)*np.cos(17*t)
+
+# Visualización
+plt.figure(figsize=(8, 8))
+plt.plot(x_t, y_t, color='purple', linewidth=1.5, label='Curva Parametrizada')
+
+# Estética de la gráfica
+plt.title('Gráfica de Funciones Parametrizadas', fontsize=14)
+plt.xlabel('x(t)')
+plt.ylabel('y(t)')
+plt.axis('equal') # Importante para que no se deforme la figura
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.legend()
+
+plt.show()
+
+# Justificación
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. El uso de múltiples términos trigonométricos con diferentes frecuencias (1t, 7t, 17t) genera una figura compleja conocida como epicicloide compuesta o tipo espirógrafo.")
+print("2. El parámetro 'axis(equal)' es fundamental para mantener la proporción geométrica real.")
