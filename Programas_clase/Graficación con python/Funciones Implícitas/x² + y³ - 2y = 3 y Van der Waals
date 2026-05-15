@@ -1,0 +1,16 @@
+from sympy import symbols, Eq, plot_implicit
+
+x, y, P, V = symbols('x y P-(Presión) V-(Volumen)')
+
+# Ecuación 1: x^2 + y^3 - 2y = 3
+# Nota: Se ajustan los rangos para que la curva no se vea cortada
+plot_implicit(Eq(x**2 + y**3 - 2*y, 3), (x, -4, 4), (y, -3, 3), title="x² + y³ - 2y = 3", line_color='red')
+
+# Ecuación 2: Van der Waals
+# Nota: V inicia en 0.04 para evitar la indeterminación en 0.03
+plot_implicit(Eq((P + 5/V**2)*(V - 0.03), 9.7), (V, 0.04, 2), (P, 0, 15), title="Van der Waals", line_color='orange')
+
+# Justificación
+print("JUSTIFICACIÓN ACERCA DEL CÓDIGO:")
+print("1. x^2 + y^3 - 2y = 3: Es una curva algebraica donde para ciertos valores de x existen múltiples valores de y.")
+print("2. van der Waals: Describe el comportamiento de gases reales. Se observa una relación inversa entre P y V, con una asíntota vertical en V = 0.03 (volumen mínimo de las moléculas).")
