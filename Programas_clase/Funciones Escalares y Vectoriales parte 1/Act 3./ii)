@@ -1,0 +1,27 @@
+import numpy as np
+import plotly.graph_objects as go
+
+x = np.linspace(-5, 5, 100)
+y = np.linspace(-5, 5, 100)
+X, Y = np.meshgrid(x, y)
+Z = X**2 - 2*Y**2
+
+fig = go.Figure()
+
+# 1. Añadir la superficie (con la barra de escala activada)
+fig.add_trace(go.Surface(x=X, y=Y, z=Z, colorscale='Plasma', showscale=True))
+
+# 2. Añadir el vértice (punto de silla)
+fig.add_trace(go.Scatter3d(
+    x=[0], y=[0], z=[0],
+    mode='markers',
+    marker=dict(size=8, color='red', symbol='circle'),
+    name='Vértice (0,0,0)'
+))
+
+fig.update_layout(
+    title='Paraboloide Hiperbólico con Vértice: f(x,y) = x² - 2y²',
+    scene=dict(xaxis_title='X', yaxis_title='Y', zaxis_title='Z'),
+    width=700, height=500
+)
+fig.show()
