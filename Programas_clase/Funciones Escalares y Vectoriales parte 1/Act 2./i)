@@ -1,0 +1,48 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Configurar el estilo para que se vea limpio y estético
+plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
+fig, ax = plt.subplots(figsize=(8, 8))
+
+# Definir los rangos de X para ambas ramas (evitando el intervalo entre -2 y 2 donde no existe la curva)
+x_derecha = np.linspace(2, 6, 400)
+x_izquierda = np.linspace(-6, -2, 400)
+
+# Calcular los valores correspondientes de Y usando la ecuación despejada: y = sqrt(x^2 - 4)
+y_derecha_pos = np.sqrt(x_derecha**2 - 4)
+y_derecha_neg = -np.sqrt(x_derecha**2 - 4)
+
+y_izquierda_pos = np.sqrt(x_izquierda**2 - 4)
+y_izquierda_neg = -np.sqrt(x_izquierda**2 - 4)
+
+# 1. Graficar la Hipérbola (Curvas de nivel)
+color_hyperbola = '#ff6b81' # Un tono rosa/coral estético
+ax.plot(x_derecha, y_derecha_pos, color=color_hyperbola, linewidth=2.5, label=r'$x^2 - y^2 = 4$')
+ax.plot(x_derecha, y_derecha_neg, color=color_hyperbola, linewidth=2.5)
+ax.plot(x_izquierda, y_izquierda_pos, color=color_hyperbola, linewidth=2.5)
+ax.plot(x_izquierda, y_izquierda_neg, color=color_hyperbola, linewidth=2.5)
+
+# 2. Graficar las Asíntotas (y = x e y = -x)
+x_asintotas = np.linspace(-6, 6, 100)
+ax.plot(x_asintotas, x_asintotas, color='gray', linestyle='--', linewidth=1.2, label=r'Asíntotas ($y = \pm x$)')
+ax.plot(x_asintotas, -x_asintotas, color='gray', linestyle='--', linewidth=1.2)
+
+# 3. Marcar los Vértices
+ax.scatter([2, -2], [0, 0], color='#2f3542', zorder=5, s=50)
+ax.text(2.2, 0.3, 'V1(2,0)', fontsize=10, fontweight='bold')
+ax.text(-3.2, 0.3, 'V2(-2,0)', fontsize=10, fontweight='bold')
+
+# Configuración de los ejes y formato visual
+ax.axhline(0, color='black', linewidth=1.2) # Eje X
+ax.axvline(0, color='black', linewidth=1.2) # Eje Y
+ax.set_xlim(-6, 6)
+ax.set_ylim(-6, 6)
+ax.set_xlabel('Eje X', fontsize=12)
+ax.set_ylabel('Eje Y', fontsize=12)
+ax.set_title('Gráfica de la Curva de Nivel: $x^2 - y^2 = 4$', fontsize=14, pad=15, fontweight='bold')
+ax.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='none')
+ax.set_aspect('equal', adjustable='box') # Proporción 1:1 para que no se deforme la hipérbola
+
+# Mostrar el resultado
+plt.show()
