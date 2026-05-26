@@ -1,0 +1,57 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
+
+# Crear malla de puntos de alta resolución
+x = np.linspace(-6, 6, 1200)
+y = np.linspace(-6, 6, 1200)
+X, Y = np.meshgrid(x, y)
+
+# Condición del radicando: (x^2 - 4)*(y^2 - 4) >= 0
+Z = (X**2 - 4) * (Y**2 - 4)
+dominio_valido = Z >= 0
+
+# Crear la figura
+fig, ax = plt.subplots(figsize=(7, 7), dpi=150)
+
+# Pintar las regiones del dominio
+ax.imshow(dominio_valido.astype(int), extent=[-6, 6, -6, 6], origin='lower',
+          cmap='Blues', alpha=0.45)
+
+# Dibujar las líneas fronterizas (Mínimos absolutos)
+color_border = '#d32f2f'
+ax.axvline(x=2, color=color_border, linestyle='--', linewidth=1.8)
+ax.axvline(x=-2, color=color_border, linestyle='--')
+ax.axhline(y=2, color=color_border, linestyle='--')
+ax.axhline(y=-2, color=color_border, linestyle='--')
+
+# Marcar el máximo relativo en el origen
+ax.plot(0, 0, marker='o', color='#2e7d32', markersize=8)
+
+# Ejes coordenados principales
+ax.axhline(0, color='#424242', linewidth=0.8, alpha=0.7)
+ax.axvline(0, color='#424242', linewidth=0.8, alpha=0.7)
+
+# Títulos y etiquetas (usando r'...' para evitar SyntaxWarning)
+ax.set_title(r'Esbozo Gráfico del Dominio de $g(x,y) = \sqrt{(x^2 - 4)(y^2 - 4)}$', fontsize=12, pad=15, weight='bold')
+ax.set_xlabel('$x$', fontsize=11)
+ax.set_ylabel('$y$', fontsize=11)
+ax.grid(True, which='both', linestyle=':', alpha=0.4, color='#9e9e9e')
+
+# Leyenda explicativa estructurada
+legend_elements = [
+    Patch(facecolor='#b3e5fc', alpha=0.7, label=r'Dominio Válido ($g(x,y) \geq 0$)'),
+    Patch(facecolor='white', edgecolor='#e0e0e0', label='Región No Permitida'),
+    plt.Line2D([0], [0], color=color_border, linestyle='--', linewidth=1.8, label=r'Mínimos Absolutos ($g=0$)'),
+    plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='#2e7d32', markersize=9, label=r'Máximo Relativo $g(0,0)=4$')
+]
+
+# UBICACIÓN PERFECTA: Mueve la leyenda a la derecha afuera del cuadro y del título
+ax.legend(handles=legend_elements, loc='upper left', bbox_to_anchor=(1.02, 1), fontsize=9, framealpha=1)
+
+ax.set_xlim(-5.5, 5.5)
+ax.set_ylim(-5.5, 5.5)
+
+# bbox_inches='tight' asegura que la leyenda de la derecha no se corte al guardar o mostrar
+plt.tight_layout()
+plt.show()
