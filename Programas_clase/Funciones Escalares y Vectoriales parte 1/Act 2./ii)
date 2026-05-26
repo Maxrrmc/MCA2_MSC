@@ -1,0 +1,46 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Configurar los parámetros del elipsoide según la ecuación
+# Centro (h, k, l)
+h, k, l = 0, 4, -1
+
+# Semiejes (a, b, c) sacados de los denominadores (2, 5, 3)
+a = 2
+b = 5
+c = 3
+
+# 2. Crear los ángulos para generar la superficie de la esfera unitaria
+u = np.linspace(0, 2 * np.pi, 100)
+v = np.linspace(0, np.pi, 100)
+
+# 3. Transformar las coordenadas esféricas a las del elipsoide escalado y movido
+x = h + a * np.outer(np.cos(u), np.sin(v))
+y = k + b * np.outer(np.sin(u), np.sin(v))
+z = l + c * np.outer(np.ones(np.size(u)), np.cos(v))
+
+# 4. Configurar la gráfica en 3D
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Dibujar la superficie del elipsoide
+# 'cmap' le da el color y 'alpha' controla la transparencia para que se vea el centro
+ax.plot_surface(x, y, z, cmap='viridis', alpha=0.7, edgecolor='none')
+
+# Graficar el punto del centro
+ax.scatter([h], [k], [l], color='red', s=100, label=f'Centro ({h}, {k}, {l})')
+
+# 5. Etiquetas y límites de los ejes para que no se deforme la perspectiva
+ax.set_xlabel('Eje X')
+ax.set_ylabel('Eje Y')
+ax.set_zlabel('Eje Z')
+ax.set_title('Gráfica del Elipsoide')
+ax.legend()
+
+# Ajustar límites de visualización alrededor del centro
+ax.set_xlim(h - 6, h + 6)
+ax.set_ylim(k - 6, k + 6)
+ax.set_zlim(l - 6, l + 6)
+
+# Mostrar la gráfica interactiva
+plt.show()
